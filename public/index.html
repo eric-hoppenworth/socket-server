@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Open the inspector</title>
+    <script src="/socket.io/socket.io.js"></script>
+  </head>
+  <body>
+    <h1>Hello there</h1>
+    <input name="message" id="message" type="text"/>
+    <button type="button" id="send" >SEND</button>
+    <div id="container">
+
+    </div>
+    <script>
+      const socket = io();
+      socket.on("echo", (message) => {
+        const p = document.createElement('p');
+        p.appendChild(document.createTextNode(message))
+        document.getElementById('container').prepend(p)
+      });
+      const sendMessage = (message) => {
+        socket.emit("echo", message);
+      }
+
+      document.getElementById('send').onclick = () => {
+        sendMessage(document.getElementById('message').value)
+      }
+    </script>
+  </body>
+</html>
