@@ -1,4 +1,5 @@
 const app = require('express')();
+const port = process.env.PORT || 3000
 const httpServer = require("http").createServer(app);
 const io = require("socket.io")(httpServer, {
   cors: {
@@ -18,6 +19,6 @@ io.on("connection", (socket) => {
 });
 
 
-httpServer.listen(3000, () => {
-  console.log('listening on 3000')
+httpServer.listen(port, () => {
+  console.log(`listening on ${port}`)
 });
